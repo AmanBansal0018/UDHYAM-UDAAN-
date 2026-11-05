@@ -1,0 +1,151 @@
+/* ===== Halloween overlay for UDHYAM UDAAN =====
+   Additive only: everything is scoped under html.hw-on, so removing that
+   class (the 🎃 toggle) restores your original look exactly. */
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+:root {
+  --hw-orange: #ff7518;
+  --hw-purple: #7b2fbe;
+  --hw-night: #140a24;
+  --hw-green: #9cff3f;
+}
+
+/* Spooky tint over the whole page (clicks pass straight through) */
+html.hw-on body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(123, 47, 190, .28), transparent 60%),
+    radial-gradient(ellipse at 50% 110%, rgba(255, 117, 24, .24), transparent 55%),
+    radial-gradient(ellipse at center, transparent 55%, rgba(10, 0, 20, .45) 100%);
+}
+
+/* Headings: glowing, creepy title font */
+html.hw-on h1 {
+  font-family: 'Creepster', cursive;
+  letter-spacing: .06em;
+  text-shadow: 0 0 8px var(--hw-orange), 0 0 22px rgba(255, 117, 24, .6), 2px 2px 0 var(--hw-purple);
+}
+html.hw-on h2,
+html.hw-on h3 {
+  text-shadow: 0 0 10px rgba(255, 117, 24, .55);
+}
+
+/* Buttons & inputs: orange glow */
+html.hw-on button,
+html.hw-on input[type="submit"],
+html.hw-on input[type="button"] {
+  border: 2px solid var(--hw-orange);
+  box-shadow: 0 0 10px rgba(255, 117, 24, .6), inset 0 0 6px rgba(255, 117, 24, .35);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+html.hw-on button:hover,
+html.hw-on input[type="submit"]:hover,
+html.hw-on input[type="button"]:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 0 18px var(--hw-orange), 0 0 32px rgba(123, 47, 190, .6);
+}
+html.hw-on input[type="text"],
+html.hw-on input:not([type]),
+html.hw-on textarea {
+  border: 2px solid var(--hw-purple);
+  box-shadow: 0 0 8px rgba(123, 47, 190, .5);
+}
+html.hw-on input:focus,
+html.hw-on textarea:focus {
+  outline: none;
+  border-color: var(--hw-orange);
+  box-shadow: 0 0 14px var(--hw-orange);
+}
+
+/* Photos get a moody tint; full colour on hover */
+html.hw-on img {
+  filter: sepia(.25) saturate(.9) contrast(1.05) hue-rotate(-8deg);
+  transition: filter .3s ease, transform .3s ease;
+}
+html.hw-on img:hover {
+  filter: none;
+  transform: scale(1.03);
+}
+
+/* Decorations (injected by halloween.js, never touch your content) */
+#hw-decor {
+  position: fixed;
+  inset: 0;
+  z-index: 9995;
+  pointer-events: none;
+  overflow: hidden;
+}
+html:not(.hw-on) #hw-decor { display: none; }
+
+#hw-decor .hw-web { position: absolute; width: 150px; height: 150px; opacity: .55; }
+#hw-decor .hw-web.tl { top: 0; left: 0; }
+#hw-decor .hw-web.tr { top: 0; right: 0; transform: scaleX(-1); }
+
+#hw-decor .hw-pumpkin {
+  position: absolute;
+  bottom: 6px;
+  font-size: 44px;
+  filter: drop-shadow(0 0 10px var(--hw-orange));
+  animation: hw-glow 2.4s ease-in-out infinite;
+}
+#hw-decor .hw-pumpkin.l { left: 10px; }
+#hw-decor .hw-pumpkin.r { right: 10px; animation-delay: 1.2s; }
+
+#hw-decor .hw-bat {
+  position: absolute;
+  left: -60px;
+  font-size: 26px;
+  animation: hw-fly linear infinite;
+}
+#hw-decor .hw-ghost {
+  position: absolute;
+  font-size: 34px;
+  opacity: .75;
+  animation: hw-float 6s ease-in-out infinite;
+}
+
+@keyframes hw-fly {
+  0%   { transform: translate(0, 0) rotate(-8deg); }
+  25%  { transform: translate(30vw, -30px) rotate(8deg); }
+  50%  { transform: translate(60vw, 20px) rotate(-8deg); }
+  75%  { transform: translate(90vw, -25px) rotate(8deg); }
+  100% { transform: translate(115vw, 0) rotate(-8deg); }
+}
+@keyframes hw-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-18px); }
+}
+@keyframes hw-glow {
+  0%, 100% { filter: drop-shadow(0 0 6px var(--hw-orange)); }
+  50%      { filter: drop-shadow(0 0 18px var(--hw-orange)); }
+}
+
+/* Theme toggle */
+#hw-toggle {
+  position: fixed;
+  left: 14px;
+  bottom: 64px;
+  z-index: 10000;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--hw-orange);
+  background: var(--hw-night);
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 117, 24, .6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #hw-decor .hw-bat,
+  #hw-decor .hw-ghost,
+  #hw-decor .hw-pumpkin { animation: none; }
+}
+@media (max-width: 600px) {
+  #hw-decor .hw-web { width: 90px; height: 90px; }
+  #hw-decor .hw-pumpkin { font-size: 32px; }
+}
