@@ -160,7 +160,18 @@ body{font-family:var(--font-body);background:linear-gradient(135deg,var(--color-
 .gallery-item:hover img{transform:scale(1.12);filter:brightness(1.05) saturate(1.2)}
 .gallery-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.75));color:white;padding:1.8rem 0.75rem 0.75rem;font-size:0.8rem;font-weight:600;text-align:center;transform:translateY(100%);transition:transform 0.3s ease}
 .gallery-item:hover .gallery-caption{transform:translateY(0)}
-
+/* Idea submission */
+.idea-section{background:var(--color-card);border:2px solid var(--color-border);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-card);text-align:center;position:relative;z-index:1}
+.idea-section h3{font-family:var(--font-heading);font-size:1.15rem;color:var(--color-primary);margin-bottom:0.4rem}
+.idea-section p{font-size:0.85rem;color:var(--color-muted);margin-bottom:1rem}
+.idea-form{display:flex;flex-direction:column;gap:0.75rem;text-align:left}
+.idea-form input,.idea-form textarea{width:100%;padding:0.9rem 1.1rem;font-size:1rem;font-family:var(--font-body);border:2px solid var(--color-border);border-radius:14px;color:var(--color-text);background:var(--color-bg);resize:vertical}
+.idea-form input:focus,.idea-form textarea:focus{outline:none;border-color:var(--color-primary-light);box-shadow:0 0 0 4px rgba(46,125,50,0.15)}
+.idea-form button{align-self:center}
+.idea-form button:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.idea-status{text-align:center;font-size:0.85rem;font-weight:600;min-height:1.4rem}
+.idea-status.ok{color:var(--color-primary)}
+.idea-status.err{color:var(--color-accent-dark)}
 /* Footer */
 .footer{text-align:center;padding:1.5rem;font-size:0.8rem;color:var(--color-muted);border-top:2px solid var(--color-border);margin-top:auto;background:linear-gradient(135deg,var(--color-card),var(--color-bg-warm));position:relative;z-index:1}
 .footer strong{color:var(--color-primary)}
@@ -303,7 +314,18 @@ body{font-family:var(--font-body);background:linear-gradient(135deg,var(--color-
       </div>
     </div>
   </div>
-
+  <section class="idea-section" id="ideaSection">
+    <h3 data-en="Share Your Business Idea" data-hi="अपना व्यवसाय विचार साझा करें">Share Your Business Idea</h3>
+    <p data-en="Tell us your idea. We will save it securely." data-hi="हमें अपना विचार बताएं। हम इसे सुरक्षित रखेंगे।">Tell us your idea. We will save it securely.</p>
+    <form class="idea-form" id="ideaForm" novalidate>
+      <input type="text" id="ideaName" maxlength="100" placeholder="Your name (optional)" data-en-placeholder="Your name (optional)" data-hi-placeholder="आपका नाम (वैकल्पिक)">
+      <textarea id="ideaText" rows="4" maxlength="3000" placeholder="Describe your business idea..." data-en-placeholder="Describe your business idea..." data-hi-placeholder="अपना व्यवसाय विचार लिखें..."></textarea>
+      <button type="submit" class="send-btn" id="ideaSubmit">
+        <span id="ideaSubmitText" data-en="Submit Idea" data-hi="विचार भेजें">Submit Idea</span>
+      </button>
+      <div class="idea-status" id="ideaStatus" role="status" aria-live="polite"></div>
+    </form>
+  </section>
   <section class="gallery-section">
     <h3 data-en="Explore Rural Opportunities" data-hi="ग्रामीण अवसरों का अन्वेषण करें">Explore Rural Opportunities</h3>
     <div class="gallery-grid">
@@ -541,7 +563,65 @@ function showHelp(){
   document.getElementById('chatContainer').appendChild(container);
   scrollToBottom();
 }
+/* Idea submission to AWS */
+const IDEA_API_URL='https://5urd2y8qcg.execute-api.ap-southeast-2.amazonaws.com/prod/ideas';
+const IDEA_TEXT={
+  en:{empty:'Please enter your business idea.',sending:'Submitting...',success:'Thank you! Your idea was saved successfully.',fail:'Could not save your idea. Please try again.',network:'Network problem. Please check your internet and try again.'},
+  hi:{empty:'कृपया अपना व्यवसाय विचार लिखें।',sending:'भेज रहे हैं...',success:'धन्यवाद! आपका विचार सफलतापूर्वक सहेजा गया।',fail:'आपका विचार सहेजा नहीं जा सका। कृपया फिर से कोशिश करें।',network:'नेटवर्क समस्या। कृपया इंटरनेट जांचें और फिर कोशिश करें।'}
+};
 
+function setIdeaStatus(text,type){
+  const el=document.getElementById('ideaStatus');
+  el.textContent=text;
+  el.className='idea-status'+(type?' '+type:'');
+}
+
+document.getElementById('ideaForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const t=IDEA_TEXT[currentLang];
+  const nameEl=document.getElementById('ideaName');
+  const ideaEl=document.getElementById('ideaText');
+  const btn=document.getElementById('ideaSubmit');
+  const btnText=document.getElementById('ideaSubmitText');
+  const idea=ideaEl.value.trim();
+  const name=nameEl.value.trim();
+
+  if(!idea){setIdeaStatus(t.empty,'err');ideaEl.focus();return;}
+
+  btn.disabled=true;
+  btnText.textContent=t.sending;
+  setIdeaStatus('','');
+
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),15000);
+
+  try{
+    const res=await fetch(IDEA_API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:name||'Anonymous',idea:idea}),
+      signal:controller.signal
+    });
+    let data={};
+    try{data=await res.json();}catch(_){}
+    if(res.ok&&data.success){
+      setIdeaStatus(t.success,'ok');
+      ideaEl.value='';
+      nameEl.value='';
+    }else if(res.status===400&&data.message){
+      setIdeaStatus(data.message,'err');
+    }else{
+      setIdeaStatus(t.fail,'err');
+    }
+  }catch(err){
+    console.error('Idea submit error:',err);
+    setIdeaStatus(t.network,'err');
+  }finally{
+    clearTimeout(timer);
+    btn.disabled=false;
+    btnText.textContent=btnText.getAttribute('data-'+currentLang);
+  }
+});
 if('speechSynthesis'in window){
   window.speechSynthesis.getVoices();
   window.speechSynthesis.onvoiceschanged=function(){window.speechSynthesis.getVoices();};
