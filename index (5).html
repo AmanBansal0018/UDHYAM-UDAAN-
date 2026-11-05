@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UDHYAM UDAAN - Rural Employment & Business Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-primary:#1B5E20;
+  --color-primary-light:#2E7D32;
+  --color-primary-bright:#4CAF50;
+  --color-primary-glow:rgba(76,175,80,0.35);
+  --color-accent:#E65100;
+  --color-accent-light:#FF9800;
+  --color-accent-dark:#BF360C;
+  --color-accent-deep:#D84315;
+  --color-bg:#F1F8E9;
+  --color-bg-warm:#FFF8E1;
+  --color-tag-bg:#FFF3E0;
+  --color-tag-border:#FFE0B2;
+  --color-impact-end:#E8F5E9;
+  --color-bubble-bg:#F9FBF9;
+  --color-card:#FFFFFF;
+  --color-text:#1B3D1B;
+  --color-muted:#546E7A;
+  --color-border:#A5D6A7;
+  --color-gold:#FFD700;
+  --color-gold-soft:#FFF8DC;
+  --shadow-soft:0 8px 32px rgba(27,94,32,0.15);
+  --shadow-card:0 4px 24px rgba(0,0,0,0.1);
+  --shadow-glow:0 0 20px rgba(76,175,80,0.3);
+  --radius:20px;
+  --font-heading:'Poppins',sans-serif;
+  --font-body:'Poppins','Noto Sans Devanagari',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:linear-gradient(135deg,var(--color-bg) 0%,var(--color-gold-soft) 50%,var(--color-bg-warm) 100%);background-size:400% 400%;animation:gradientShift 12s ease infinite;color:var(--color-text);line-height:1.7;font-size:1rem;min-height:100vh;display:flex;flex-direction:column}
+@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* Floating particles */
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.particle{position:absolute;border-radius:50%;background:var(--color-primary-bright);opacity:0.15;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:0.2}90%{opacity:0.2}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+
+/* Header */
+.header{background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-primary-light) 40%,var(--color-primary-bright) 100%);color:white;padding:1rem 1.5rem;text-align:center;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-soft);animation:headerGlow 3s ease-in-out infinite alternate}
+@keyframes headerGlow{from{box-shadow:0 4px 20px rgba(27,94,32,0.2)}to{box-shadow:0 4px 30px rgba(76,175,80,0.4)}}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:0.75rem;flex-wrap:wrap;position:relative}
+.header-brand{display:flex;align-items:center;gap:0.75rem}
+.header-logo{width:44px;height:44px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 15px rgba(255,255,255,0.3);animation:logoPulse 2s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.header-logo svg{width:28px;height:28px}
+.header h1{font-family:var(--font-heading);font-size:1.5rem;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,white,var(--color-gold),white);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s linear infinite}
+@keyframes shimmer{to{background-position:200% center}}
+.header p{font-size:0.8rem;opacity:0.9;margin-top:0.15rem}
+.header-actions{display:flex;align-items:center;gap:0.6rem}
+.help-btn{background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.4);color:white;padding:0.5rem 1rem;border-radius:10px;font-family:var(--font-body);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;gap:0.4rem;backdrop-filter:blur(4px)}
+.help-btn:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px);box-shadow:0 4px 15px rgba(255,255,255,0.2)}
+.lang-btn{background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.4);color:white;padding:0.5rem 1rem;border-radius:10px;font-family:var(--font-body);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;backdrop-filter:blur(4px)}
+.lang-btn:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px)}
+
+/* Main */
+.main{max-width:900px;margin:0 auto;padding:2rem 1.5rem;display:flex;flex-direction:column;gap:2rem;width:100%;flex:1;position:relative;z-index:1}
+
+/* Hero */
+.hero{background:var(--color-card);border-radius:var(--radius);padding:0;overflow:hidden;border:1px solid var(--color-border);box-shadow:var(--shadow-card);display:flex;flex-direction:column;position:relative}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--color-primary),var(--color-accent),var(--color-primary-bright),var(--color-accent));background-size:300% 100%;animation:borderFlow 4s linear infinite;z-index:2}
+@keyframes borderFlow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:1.5rem 2rem 0.5rem;text-align:center}
+.stat-card{background:linear-gradient(135deg,var(--color-bg-warm),var(--color-card));border-radius:14px;padding:1rem 0.5rem;border:1.5px solid var(--color-border);position:relative;overflow:hidden;transition:all 0.3s ease}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(27,94,32,0.15);border-color:var(--color-primary-light)}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--color-primary),var(--color-accent));border-radius:14px 14px 0 0}
+.stat-number{font-family:var(--font-heading);font-size:1.6rem;font-weight:800;color:var(--color-primary);line-height:1.2}
+.stat-label{font-size:0.72rem;color:var(--color-muted);margin-top:0.3rem;font-weight:500}
+.stat-growth{display:inline-flex;align-items:center;gap:0.2rem;background:linear-gradient(135deg,#E8F5E9,#C8E6C9);color:var(--color-primary);padding:0.2rem 0.6rem;border-radius:12px;font-size:0.7rem;font-weight:700;margin-top:0.4rem}
+.stat-growth svg{width:10px;height:10px;fill:var(--color-primary)}
+.stat-vs{font-size:0.6rem;color:var(--color-muted);margin-top:0.15rem}
+.hero-content{padding:1rem 2rem 1.5rem;text-align:center}
+.hero h2{font-family:var(--font-heading);font-size:1.5rem;color:var(--color-primary);margin-bottom:0.5rem;font-weight:700}
+.hero p{font-size:0.9rem;color:var(--color-muted);max-width:520px;margin:0 auto}
+.hero-tagline{margin-top:1rem;display:flex;justify-content:center;gap:0.5rem;flex-wrap:wrap}
+.tag{background:linear-gradient(135deg,var(--color-bg-warm),var(--color-tag-bg));color:var(--color-accent);padding:0.4rem 1rem;border-radius:20px;font-size:0.78rem;font-weight:600;border:1.5px solid var(--color-tag-border);transition:all 0.3s ease;cursor:default}
+.tag:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(230,81,0,0.2);border-color:var(--color-accent-light)}
+
+/* Impact Banner */
+.impact-banner{background:linear-gradient(135deg,var(--color-bg-warm) 0%,var(--color-impact-end) 100%);border-radius:var(--radius);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;border:2px dashed var(--color-border);flex-wrap:wrap;justify-content:center;position:relative;overflow:hidden}
+.impact-banner::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(76,175,80,0.08) 0%,transparent 70%);animation:rotateSlow 20s linear infinite}
+@keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.impact-banner img{width:64px;height:64px;border-radius:12px;object-fit:cover;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,0.1);position:relative;z-index:1}
+.impact-text{text-align:center;position:relative;z-index:1}
+.impact-text h3{font-family:var(--font-heading);font-size:1.1rem;color:var(--color-primary);font-weight:700}
+.impact-text p{font-size:0.82rem;color:var(--color-muted);max-width:400px}
+
+/* Chat */
+.chat-container{background:var(--color-card);border:2px solid var(--color-border);border-radius:var(--radius);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;min-height:380px;max-height:520px;overflow-y:auto;box-shadow:var(--shadow-card);position:relative}
+.chat-container::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:var(--radius);box-shadow:inset 0 0 30px rgba(76,175,80,0.05);pointer-events:none}
+.chat-message{display:flex;gap:0.75rem;align-items:flex-start;animation:fadeInUp 0.4s ease}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(15px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.chat-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-size:0.75rem;font-weight:700;color:white;flex-shrink:0;box-shadow:0 3px 10px rgba(0,0,0,0.15);position:relative}
+.chat-avatar.user{background:linear-gradient(135deg,var(--color-primary-light),var(--color-primary));animation:avatarGlowUser 2s ease-in-out infinite alternate}
+.chat-avatar.bot{background:linear-gradient(135deg,var(--color-accent),var(--color-accent-dark));animation:avatarGlowBot 2s ease-in-out infinite alternate}
+@keyframes avatarGlowUser{from{box-shadow:0 0 5px rgba(46,125,50,0.3)}to{box-shadow:0 0 15px rgba(46,125,50,0.5)}}
+@keyframes avatarGlowBot{from{box-shadow:0 0 5px rgba(230,81,0,0.3)}to{box-shadow:0 0 15px rgba(230,81,0,0.5)}}
+.chat-bubble{padding:0.9rem 1.15rem;border-radius:16px;font-size:0.88rem;line-height:1.7;max-width:calc(100% - 65px);word-wrap:break-word;box-shadow:0 2px 10px rgba(0,0,0,0.06);transition:transform 0.2s ease}
+.chat-bubble:hover{transform:translateY(-1px)}
+.chat-bubble.user{background:linear-gradient(135deg,var(--color-primary-light),var(--color-primary));color:white;border-bottom-left-radius:4px}
+.chat-bubble.bot{background:var(--color-bubble-bg);color:var(--color-text);border:1.5px solid var(--color-border);border-bottom-right-radius:4px}
+.chat-bubble a{color:var(--color-primary);font-weight:600;text-decoration:underline}
+.chat-bubble a:hover{color:var(--color-accent)}
+.suggestions{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.6rem}
+.suggestion-btn{padding:0.5rem 1rem;font-size:0.8rem;font-family:var(--font-body);font-weight:600;background:rgba(27,94,32,0.07);color:var(--color-primary);border:1.5px solid var(--color-border);border-radius:20px;cursor:pointer;transition:all 0.25s ease;position:relative;overflow:hidden}
+.suggestion-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);transition:left 0.5s ease}
+.suggestion-btn:hover{background:var(--color-primary);color:white;transform:translateY(-2px);box-shadow:0 6px 18px rgba(27,94,32,0.25)}
+.suggestion-btn:hover::before{left:100%}
+
+/* Input */
+.input-area{background:var(--color-card);border:2px dashed var(--color-border);border-radius:var(--radius);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;box-shadow:var(--shadow-card);position:relative}
+.input-area:focus-within{border-color:var(--color-primary-light);box-shadow:0 0 0 4px rgba(46,125,50,0.1),var(--shadow-card)}
+.input-row{display:flex;gap:0.75rem;align-items:stretch}
+.input-row input{flex:1;padding:1rem 1.25rem;font-size:1rem;font-family:var(--font-body);border:2px solid var(--color-border);border-radius:14px;color:var(--color-text);background:var(--color-bg);transition:all 0.3s ease}
+.input-row input:focus{outline:none;border-color:var(--color-primary-light);box-shadow:0 0 0 4px rgba(46,125,50,0.15),0 0 20px rgba(76,175,80,0.1)}
+.voice-btn{padding:1rem 1.5rem;font-size:0.9rem;font-family:var(--font-body);font-weight:600;background:linear-gradient(135deg,var(--color-accent),var(--color-accent-deep));color:white;border:none;border-radius:14px;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;gap:0.4rem;white-space:nowrap;box-shadow:0 4px 15px rgba(230,81,0,0.25);position:relative;overflow:hidden}
+.voice-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s ease}
+.voice-btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(230,81,0,0.35)}
+.voice-btn:hover::after{left:100%}
+.voice-btn:active{transform:scale(0.97)}
+.voice-btn.listening{animation:pulse 1.5s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(230,81,0,0.5)}70%{box-shadow:0 0 0 18px rgba(230,81,0,0)}100%{box-shadow:0 0 0 0 rgba(230,81,0,0)}}
+.send-btn{padding:1rem 1.5rem;font-size:0.9rem;font-family:var(--font-body);font-weight:600;background:linear-gradient(135deg,var(--color-primary),var(--color-primary-light));color:white;border:none;border-radius:14px;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;gap:0.4rem;white-space:nowrap;box-shadow:0 4px 15px rgba(27,94,32,0.25);position:relative;overflow:hidden}
+.send-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s ease}
+.send-btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(27,94,32,0.35)}
+.send-btn:hover::after{left:100%}
+.status-bar{text-align:center;font-size:0.78rem;color:var(--color-muted);padding:0.5rem}
+
+/* Suggested Businesses */
+.suggested-section{margin-top:0.75rem;text-align:center}
+.suggested-label{font-size:0.75rem;color:var(--color-muted);margin-bottom:0.6rem;font-weight:500;letter-spacing:0.5px}
+.suggested-btns{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap}
+.suggested-btn{padding:0.7rem 1.1rem;font-size:0.8rem;font-family:var(--font-body);font-weight:600;background:linear-gradient(135deg,var(--color-primary),var(--color-primary-light));color:white;border:none;border-radius:12px;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;gap:0.4rem;white-space:nowrap;box-shadow:0 4px 15px rgba(27,94,32,0.2);position:relative;overflow:hidden}
+.suggested-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s ease}
+.suggested-btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(27,94,32,0.3)}
+.suggested-btn:hover::after{left:100%}
+.suggested-btn svg{width:16px;height:16px;fill:white}
+.suggested-btn:nth-child(2){background:linear-gradient(135deg,var(--color-accent),var(--color-accent-deep));box-shadow:0 4px 15px rgba(230,81,0,0.2)}
+.suggested-btn:nth-child(2):hover{box-shadow:0 8px 25px rgba(230,81,0,0.3)}
+.suggested-btn:nth-child(3){background:linear-gradient(135deg,var(--color-primary-bright),var(--color-primary));box-shadow:0 4px 15px rgba(76,175,80,0.2)}
+.suggested-btn:nth-child(3):hover{box-shadow:0 8px 25px rgba(76,175,80,0.3)}
+
+/* Gallery */
+.gallery-section{text-align:center;position:relative;z-index:1}
+.gallery-section h3{font-family:var(--font-heading);font-size:1.15rem;color:var(--color-primary);margin-bottom:1rem;position:relative;display:inline-block}
+.gallery-section h3::after{content:'';position:absolute;bottom:-4px;left:25%;width:50%;height:3px;background:linear-gradient(90deg,transparent,var(--color-primary-bright),transparent);border-radius:2px}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem}
+.gallery-item{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-card);aspect-ratio:4/3;transition:all 0.4s ease;cursor:pointer}
+.gallery-item:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 12px 35px rgba(0,0,0,0.15)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:all 0.5s ease;filter:brightness(0.92) saturate(1.1)}
+.gallery-item:hover img{transform:scale(1.12);filter:brightness(1.05) saturate(1.2)}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.75));color:white;padding:1.8rem 0.75rem 0.75rem;font-size:0.8rem;font-weight:600;text-align:center;transform:translateY(100%);transition:transform 0.3s ease}
+.gallery-item:hover .gallery-caption{transform:translateY(0)}
+/* Idea submission */
+.idea-section{background:var(--color-card);border:2px solid var(--color-border);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-card);text-align:center;position:relative;z-index:1}
+.idea-section h3{font-family:var(--font-heading);font-size:1.15rem;color:var(--color-primary);margin-bottom:0.4rem}
+.idea-section p{font-size:0.85rem;color:var(--color-muted);margin-bottom:1rem}
+.idea-form{display:flex;flex-direction:column;gap:0.75rem;text-align:left}
+.idea-form input,.idea-form textarea{width:100%;padding:0.9rem 1.1rem;font-size:1rem;font-family:var(--font-body);border:2px solid var(--color-border);border-radius:14px;color:var(--color-text);background:var(--color-bg);resize:vertical}
+.idea-form input:focus,.idea-form textarea:focus{outline:none;border-color:var(--color-primary-light);box-shadow:0 0 0 4px rgba(46,125,50,0.15)}
+.idea-form button{align-self:center}
+.idea-form button:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.idea-status{text-align:center;font-size:0.85rem;font-weight:600;min-height:1.4rem}
+.idea-status.ok{color:var(--color-primary)}
+.idea-status.err{color:var(--color-accent-dark)}
+/* Footer */
+.footer{text-align:center;padding:1.5rem;font-size:0.8rem;color:var(--color-muted);border-top:2px solid var(--color-border);margin-top:auto;background:linear-gradient(135deg,var(--color-card),var(--color-bg-warm));position:relative;z-index:1}
+.footer strong{color:var(--color-primary)}
+
+/* Responsive */
+@media(max-width:768px){
+  .header h1{font-size:1.15rem;letter-spacing:1px}
+  .hero-stats{grid-template-columns:repeat(2,1fr);padding:1.25rem 1rem 0.25rem}
+  .stat-number{font-size:1.3rem}
+  .hero-content{padding:1.25rem 1rem}
+  .hero h2{font-size:1.2rem}
+  .input-row{flex-direction:column}
+  .chat-container{min-height:300px;max-height:420px}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  .header-inner{flex-direction:column;gap:0.5rem}
+  .header-actions{gap:0.4rem}
+  .main{padding:1.25rem 1rem}
+  .hero-stats{grid-template-columns:1fr 1fr;gap:0.6rem}
+  .stat-card{padding:0.75rem 0.35rem}
+  .stat-number{font-size:1.1rem}
+  .stat-label{font-size:0.65rem}
+  .impact-banner{flex-direction:column;text-align:center}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--color-border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--color-primary-light)}
+</style>
+<link rel="stylesheet" href="halloween.css">
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-logo">
+        <svg viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      </div>
+      <div>
+        <h1 data-en="UDHYAM UDAAN" data-hi="उद्यम उड़ान">UDHYAM UDAAN</h1>
+        <p data-en="Empowering Rural Employment & Entrepreneurship" data-hi="ग्रामीण रोजगार और उद्यमिता को सशक्त बनाना">Empowering Rural Employment & Entrepreneurship</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="help-btn" id="helpBtn" onclick="showHelp()" title="Help">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+        <span data-en="Help" data-hi="सहायता">Help</span>
+      </button>
+      <button class="lang-btn" id="langBtn" onclick="toggleLanguage()">हिंदी</button>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="hero">
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number" data-en="12,500+" data-hi="12,500+">12,500+</div>
+        <div class="stat-label" data-en="Rural Businesses" data-hi="ग्रामीण व्यवसाय">Rural Businesses</div>
+        <div class="stat-growth"><svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg><span data-en="+28%" data-hi="+28%">+28%</span></div>
+        <div class="stat-vs" data-en="vs last year" data-hi="पिछले साल से">vs last year</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-en="45,000+" data-hi="45,000+">45,000+</div>
+        <div class="stat-label" data-en="Jobs Created" data-hi="नौकरियां बनाई गईं">Jobs Created</div>
+        <div class="stat-growth"><svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg><span data-en="+35%" data-hi="+35%">+35%</span></div>
+        <div class="stat-vs" data-en="vs last year" data-hi="पिछले साल से">vs last year</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-en="Rs 320Cr" data-hi="₹320 करोड़">Rs 320Cr</div>
+        <div class="stat-label" data-en="Revenue Generated" data-hi="आय एक्रृत हुआ">Revenue Generated</div>
+        <div class="stat-growth"><svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg><span data-en="+42%" data-hi="+42%">+42%</span></div>
+        <div class="stat-vs" data-en="vs last year" data-hi="पिछले साल से">vs last year</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-en="8,200+" data-hi="8,200+">8,200+</div>
+        <div class="stat-label" data-en="Women Entrepreneurs" data-hi="महिला उद्यमि">Women Entrepreneurs</div>
+        <div class="stat-growth"><svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg><span data-en="+51%" data-hi="+51%">+51%</span></div>
+        <div class="stat-vs" data-en="vs last year" data-hi="पिछले साल से">vs last year</div>
+      </div>
+    </div>
+    <div class="hero-content">
+      <h2 data-en="Speak or Type to Start Your Business!" data-hi="बोलें या टाइप करें अपना व्यवसाय शुरू करने के लिए!">Speak or Type to Start Your Business!</h2>
+      <div class="hero-tagline">
+        <span class="tag" data-en="Self Employment" data-hi="स्वरोजगार">Self Employment</span>
+        <span class="tag" data-en="Rural Skills" data-hi="ग्रामीण कौशल">Rural Skills</span>
+        <span class="tag" data-en="Better Future" data-hi="बेहतर भविष्य">Better Future</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="impact-banner">
+    <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=200&h=200&fit=crop" alt="Green fields">
+    <div class="impact-text">
+      <h3 data-en="Building Rural India, One Business at a Time" data-hi="एक व्यवसाय के साथ ग्रामीण भारत का निर्माण">Building Rural India, One Business at a Time</h3>
+      <p data-en="Join thousands of rural entrepreneurs who have started their journey with UDHYAM UDAAN." data-hi="हजारों ग्रामीण उद्यमियों के साथ जुड़ें जिन्होंने उद्यम उड़ान के साथ अपनी यात्रा शुरू की है।">Join thousands of rural entrepreneurs who have started their journey with UDHYAM UDAAN.</p>
+    </div>
+  </section>
+
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-message">
+      <div class="chat-avatar bot">UU</div>
+      <div class="chat-bubble bot" data-en="Namaste! I am UDHYAM UDAAN. I can help you start a small business. Try saying or typing: Haryana fish farming, Punjab dairy, or UP rice mill." data-hi="नमस्ते! मैं उद्यम उड़ान हूँ। मैं आपको छोटा व्यवसाय शुरू करने में मदद कर सकता हूँ। कहें या टाइप करें: हरियाणा मछली पालन, पंजाब डेयरी, या यूपी चावल मिल।">Namaste! I am UDHYAM UDAAN. I can help you start a small business. Try saying or typing: Haryana fish farming, Punjab dairy, or UP rice mill.</div>
+    </div>
+  </div>
+
+  <div class="input-area">
+    <div class="input-row">
+      <input type="text" id="userInput" placeholder="Type your query here..." data-en-placeholder="Type your query here..." data-hi-placeholder="अपना सवाल यहाँ टाइप करें..." onkeypress="if(event.key==='Enter')handleSend()">
+      <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.92V21c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.57 5.42-2.92 5.91-5.92.1-.6-.39-1.14-1-1.14z"/></svg>
+        <span id="voiceBtnText" data-en="Speak" data-hi="बोलें">Speak</span>
+      </button>
+      <button class="send-btn" onclick="handleSend()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        <span data-en="Send" data-hi="भेजें">Send</span>
+      </button>
+    </div>
+    <div class="status-bar" id="statusBar" data-en="Click 'Speak' and say your business query" data-hi="'बोलें' दबाएं और अपना व्यवसाय सवाल कहें">Click 'Speak' and say your business query</div>
+    <div class="suggested-section">
+      <div class="suggested-label" data-en="Suggested Businesses" data-hi="सुझाए गए व्यवसाय">Suggested Businesses</div>
+      <div class="suggested-btns">
+        <button class="suggested-btn" onclick="window.open('https://amanbansal0018.github.io/Haryana-fish-farming-guide/','_blank')">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          <span data-en="Haryana Fish Farming" data-hi="हरियाणा मछली पालन">Haryana Fish Farming</span>
+        </button>
+        <button class="suggested-btn" onclick="window.open('https://amanbansal0018.github.io/Verka-Punjab-Dairy-as-a-small-buisness/','_blank')">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          <span data-en="Punjab Verka Dairy" data-hi="पंजाब वर्का डेयरी">Punjab Verka Dairy</span>
+        </button>
+        <button class="suggested-btn" onclick="window.open('https://amanbansal0018.github.io/UP-Rice-Mill/','_blank')">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          <span data-en="UP Rice Mill" data-hi="यूपी चावल मिल">UP Rice Mill</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <section class="idea-section" id="ideaSection">
+    <h3 data-en="Share Your Business Idea" data-hi="अपना व्यवसाय विचार साझा करें">Share Your Business Idea</h3>
+    <p data-en="Tell us your idea. We will save it securely." data-hi="हमें अपना विचार बताएं। हम इसे सुरक्षित रखेंगे।">Tell us your idea. We will save it securely.</p>
+    <form class="idea-form" id="ideaForm" novalidate>
+      <input type="text" id="ideaName" maxlength="100" placeholder="Your name (optional)" data-en-placeholder="Your name (optional)" data-hi-placeholder="आपका नाम (वैकल्पिक)">
+      <textarea id="ideaText" rows="4" maxlength="3000" placeholder="Describe your business idea..." data-en-placeholder="Describe your business idea..." data-hi-placeholder="अपना व्यवसाय विचार लिखें..."></textarea>
+      <button type="submit" class="send-btn" id="ideaSubmit">
+        <span id="ideaSubmitText" data-en="Submit Idea" data-hi="विचार भेजें">Submit Idea</span>
+      </button>
+      <div class="idea-status" id="ideaStatus" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+  <section class="gallery-section">
+    <h3 data-en="Explore Rural Opportunities" data-hi="ग्रामीण अवसरों का अन्वेषण करें">Explore Rural Opportunities</h3>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=300&h=250&fit=crop" alt="Green wheat field - agriculture">
+        <div class="gallery-caption" data-en="Agriculture" data-hi="कृषि">Agriculture</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?w=300&h=250&fit=crop" alt="Dairy cows in farm">
+        <div class="gallery-caption" data-en="Dairy Farming" data-hi="डेयरी फार्मिंग">Dairy Farming</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1544552866-d3ed42536cfd?w=300&h=250&fit=crop" alt="Fresh fish at market">
+        <div class="gallery-caption" data-en="Fishery" data-hi="मत्स्य पालन">Fishery</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&h=250&fit=crop" alt="Rice grain processing">
+        <div class="gallery-caption" data-en="Rice Mill" data-hi="चावल मिल">Rice Mill</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span data-en="UDHYAM UDAAN - Empowering Rural Entrepreneurs & Employment" data-hi="उद्यम उड़ान - ग्रामीण उद्यमियों और रोजगार को सशक्त बनाना"><strong>UDHYAM UDAAN</strong> - Empowering Rural Entrepreneurs & Employment</span>
+</footer>
+
+<script>
+/* Floating particles */
+(function(){
+  const container=document.getElementById('particles');
+  const count=18;
+  for(let i=0;i<count;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const size=Math.random()*6+3;
+    p.style.width=size+'px';
+    p.style.height=size+'px';
+    p.style.left=Math.random()*100+'%';
+    p.style.animationDuration=(Math.random()*10+8)+'s';
+    p.style.animationDelay=(Math.random()*8)+'s';
+    container.appendChild(p);
+  }
+})();
+
+let currentLang='en';
+let recognition=null;
+let isListening=false;
+
+const URLS={
+  haryana:'https://amanbansal0018.github.io/Haryana-fish-farming-guide/',
+  fisheries:'https://amanbansal0018.github.io/Haryana-fish-farming-guide/',
+  dairy:'https://amanbansal0018.github.io/Verka-Punjab-Dairy-as-a-small-buisness/',
+  rice:'https://amanbansal0018.github.io/UP-Rice-Mill/'
+};
+
+const RESPONSES={
+  en:{
+    welcome:"Namaste! I am UDHYAM UDAAN. I can help you start a small business. Try saying or typing: Haryana fish farming, Punjab dairy, or UP rice mill.",
+    haryanaRedirect:"Great choice! Haryana business opportunities await you. Redirecting you now...",
+    fishRedirect:"Great choice! Haryana Fish Farming is a profitable business. Redirecting you now...",
+    dairyRedirect:"Excellent! Punjab Verka Dairy is a great small business opportunity. Redirecting you now...",
+    riceRedirect:"Wonderful! UP Rice Mill is a promising venture. Redirecting you now...",
+    sorry:"Sorry, I cannot help with that. Please try saying Haryana fish farming or ask about other rural businesses.",
+    speakPrompt:"Click 'Speak' and say your business query",
+    listening:"Listening... speak now",
+    stopped:"Stopped listening. Click 'Speak' to try again."
+  },
+  hi:{
+    welcome:"नमस्ते! मैं उद्यम उड़ान हूँ। मैं आपको छोटा व्यवसाय शुरू करने में मदद कर सकता हूँ। कहें या टाइप करें: हरियाणा मछली पालन, पंजाब डेयरी, या यूपी चावल मिल।",
+    haryanaRedirect:"बढ़िया चुनाव! हरियाणा के व्यवसायीक अवसर आपका इंतज़ार कर रहे हैं। अब आपको भेज रहा हूँ...",
+    fishRedirect:"बढ़िया चुनाव! हरियाणा मछली पालन एक लाभदायक व्यवसाय है। अब आपको भेज रहा हूँ...",
+    dairyRedirect:"शानदार! पंजाब वर्का डेयरी एक बेहतरीन छोटा व्यवसाय अवसर है। अब आपको भेज रहा हूँ...",
+    riceRedirect:"बहुत अच्छा! यूपी चावल मिल एक आशाजनक व्यवसाय है। अब आपको भेज रहा हूँ...",
+    sorry:"क्षमा करें, मैं अभी इसमें सक्षम नहीं हूँ। कृपया हरियाणा मछली पालन कहें या अन्य ग्रामीण व्यवसायों के बारे में पूछें।",
+    speakPrompt:"'बोलें' दबाएं और अपना व्यवसाय सवाल कहें",
+    listening:"सुन रहा हूँ... अब बोलें",
+    stopped:"सुनना बंद कर दिया। फिर से कोशिश करने के लिए 'बोलें' दबाएं।"
+  }
+};
+
+function initSpeechRecognition(){
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SpeechRecognition){alert('Sorry, your browser does not support voice recognition.');return null;}
+  const rec=new SpeechRecognition();
+  rec.lang='hi-IN';
+  rec.continuous=false;
+  rec.interimResults=false;
+  rec.onstart=function(){isListening=true;document.getElementById('voiceBtn').classList.add('listening');document.getElementById('voiceBtnText').textContent=currentLang==='hi'?'सुन रहा हूँ...':'Listening...';setStatus(currentLang==='hi'?'सुन रहा हूँ... अब बोलें':'Listening... speak now');};
+  rec.onend=function(){isListening=false;document.getElementById('voiceBtn').classList.remove('listening');document.getElementById('voiceBtnText').textContent=currentLang==='hi'?'बोलें':'Speak';setStatus(currentLang==='hi'?'सुनना बंद कर दिया। फिर से कोशिश करने के लिए \'बोलें\' दबाएं।':"Stopped listening. Click 'Speak' to try again.");};
+  rec.onresult=function(event){const transcript=event.results[0][0].transcript;document.getElementById('userInput').value=transcript;handleSend();};
+  rec.onerror=function(event){isListening=false;document.getElementById('voiceBtn').classList.remove('listening');document.getElementById('voiceBtnText').textContent=currentLang==='hi'?'बोलें':'Speak';setStatus('Voice error: '+event.error);};
+  return rec;
+}
+
+function toggleVoice(){
+  if(!recognition) recognition=initSpeechRecognition();
+  if(!recognition) return;
+  if(isListening){recognition.stop();}else{recognition.start();}
+}
+
+function handleSend(){
+  const input=document.getElementById('userInput');
+  const text=input.value.trim();
+  if(!text) return;
+  addMessage(text,'user');
+  input.value='';
+  const apiResponse=processUserMessageAsAI(text);
+  handleUdhyamUdaanResponse(apiResponse);
+}
+
+/* AI Backend Logic */
+function processUserMessageAsAI(text){
+  const lower=text.toLowerCase();
+
+  if(lower.includes('haryana')){
+    return JSON.stringify({action:'redirect',destination:'haryana'});
+  }
+  if(lower.includes('fisheries')||lower.includes('fish')){
+    return JSON.stringify({action:'redirect',destination:'fisheries'});
+  }
+  if(lower.includes('dairy')||lower.includes('doodh')||lower.includes('milk')||lower.includes('gai')||lower.includes('gaay')||lower.includes('punjab')||lower.includes('verka')){
+    return JSON.stringify({action:'redirect',destination:'dairy'});
+  }
+  if(lower.includes('rice')||lower.includes('mill')||lower.includes('chawal')||lower.includes('chaval')||lower.includes('up')||lower.includes('uttar pradesh')){
+    return JSON.stringify({action:'redirect',destination:'rice'});
+  }
+
+  return RESPONSES[currentLang].sorry;
+}
+
+/* Frontend Response Handler */
+function handleUdhyamUdaanResponse(apiResponse){
+  try{
+    const data=JSON.parse(apiResponse.trim());
+    if(data.action==='redirect'){
+      let redirectUrl='';
+      let redirectMsg='';
+      if(data.destination==='haryana'){
+        redirectUrl=URLS.haryana;
+        redirectMsg=RESPONSES[currentLang].haryanaRedirect;
+      }else if(data.destination==='fisheries'){
+        redirectUrl=URLS.fisheries;
+        redirectMsg=RESPONSES[currentLang].fishRedirect;
+      }else if(data.destination==='dairy'){
+        redirectUrl=URLS.dairy;
+        redirectMsg=RESPONSES[currentLang].dairyRedirect;
+      }else if(data.destination==='rice'){
+        redirectUrl=URLS.rice;
+        redirectMsg=RESPONSES[currentLang].riceRedirect;
+      }
+      if(redirectUrl){
+        addBotMessage(redirectMsg);
+        speakText(redirectMsg);
+        setTimeout(()=>window.open(redirectUrl,'_blank'),2000);
+        return;
+      }
+    }
+  }catch(e){
+    displayMessageInChatbox(apiResponse);
+    speakText(apiResponse);
+  }
+}
+
+function displayMessageInChatbox(text){
+  addBotMessage(text);
+}
+
+function addMessage(text,sender){
+  const container=document.createElement('div');
+  container.className='chat-message';
+  const avatar=sender==='user'?'You':'UU';
+  container.innerHTML='<div class="chat-avatar '+sender+'">'+avatar+'</div><div class="chat-bubble '+sender+'">'+escapeHtml(text)+'</div>';
+  document.getElementById('chatContainer').appendChild(container);
+  scrollToBottom();
+}
+
+function addBotMessage(text){
+  const container=document.createElement('div');
+  container.className='chat-message';
+  container.innerHTML='<div class="chat-avatar bot">UU</div><div class="chat-bubble bot">'+text+'</div>';
+  document.getElementById('chatContainer').appendChild(container);
+  scrollToBottom();
+}
+
+function scrollToBottom(){
+  const c=document.getElementById('chatContainer');
+  c.scrollTop=c.scrollHeight;
+}
+
+function escapeHtml(text){
+  const d=document.createElement('div');
+  d.textContent=text;
+  return d.innerHTML;
+}
+
+function speakText(text){
+  if(!('speechSynthesis'in window)) return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='hi-IN';
+  u.rate=0.9;
+  u.pitch=1;
+  const voices=window.speechSynthesis.getVoices();
+  const hindiVoice=voices.find(v=>v.lang.includes('hi')||v.lang.includes('Hindi'));
+  if(hindiVoice) u.voice=hindiVoice;
+  window.speechSynthesis.speak(u);
+}
+
+function setStatus(text){document.getElementById('statusBar').textContent=text;}
+
+function toggleLanguage(){
+  currentLang=currentLang==='en'?'hi':'en';
+  document.getElementById('langBtn').textContent=currentLang==='hi'?'English':'हिंदी';
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    const t=el.getAttribute('data-'+currentLang);
+    if(t) el.textContent=t;
+  });
+  document.querySelectorAll('[data-en-placeholder]').forEach(el=>{
+    const t=el.getAttribute('data-'+currentLang+'-placeholder');
+    if(t) el.placeholder=t;
+  });
+  document.getElementById('voiceBtnText').textContent=currentLang==='hi'?'बोलें':'Speak';
+  setStatus(RESPONSES[currentLang].speakPrompt);
+}
+
+function showHelp(){
+  const msg = currentLang === 'hi'
+    ? 'सहायता अनुभाग जल्द ही उपलब्ध होगा। तब तक, बस बोलें या टाइप करें!'
+    : 'Help section coming soon. For now, just Speak or Type!';
+  const container = document.createElement('div');
+  container.className = 'chat-message';
+  container.innerHTML = '<div class="chat-avatar bot">UU</div><div class="chat-bubble bot">'+msg+'</div>';
+  document.getElementById('chatContainer').appendChild(container);
+  scrollToBottom();
+}
+/* Idea submission to AWS */
+const IDEA_API_URL='https://5urd2y8qcg.execute-api.ap-southeast-2.amazonaws.com/prod/ideas';
+const IDEA_TEXT={
+  en:{empty:'Please enter your business idea.',sending:'Submitting...',success:'Thank you! Your idea was saved successfully.',fail:'Could not save your idea. Please try again.',network:'Network problem. Please check your internet and try again.'},
+  hi:{empty:'कृपया अपना व्यवसाय विचार लिखें।',sending:'भेज रहे हैं...',success:'धन्यवाद! आपका विचार सफलतापूर्वक सहेजा गया।',fail:'आपका विचार सहेजा नहीं जा सका। कृपया फिर से कोशिश करें।',network:'नेटवर्क समस्या। कृपया इंटरनेट जांचें और फिर कोशिश करें।'}
+};
+
+function setIdeaStatus(text,type){
+  const el=document.getElementById('ideaStatus');
+  el.textContent=text;
+  el.className='idea-status'+(type?' '+type:'');
+}
+
+document.getElementById('ideaForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const t=IDEA_TEXT[currentLang];
+  const nameEl=document.getElementById('ideaName');
+  const ideaEl=document.getElementById('ideaText');
+  const btn=document.getElementById('ideaSubmit');
+  const btnText=document.getElementById('ideaSubmitText');
+  const idea=ideaEl.value.trim();
+  const name=nameEl.value.trim();
+
+  if(!idea){setIdeaStatus(t.empty,'err');ideaEl.focus();return;}
+
+  btn.disabled=true;
+  btnText.textContent=t.sending;
+  setIdeaStatus('','');
+
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),15000);
+
+  try{
+    const res=await fetch(IDEA_API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:name||'Anonymous',idea:idea}),
+      signal:controller.signal
+    });
+    let data={};
+    try{data=await res.json();}catch(_){}
+    if(res.ok&&data.success){
+      setIdeaStatus(t.success,'ok');
+      ideaEl.value='';
+      nameEl.value='';
+    }else if(res.status===400&&data.message){
+      setIdeaStatus(data.message,'err');
+    }else{
+      setIdeaStatus(t.fail,'err');
+    }
+  }catch(err){
+    console.error('Idea submit error:',err);
+    setIdeaStatus(t.network,'err');
+  }finally{
+    clearTimeout(timer);
+    btn.disabled=false;
+    btnText.textContent=btnText.getAttribute('data-'+currentLang);
+  }
+});
+if('speechSynthesis'in window){
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged=function(){window.speechSynthesis.getVoices();};
+}
+</script>
+
+<script src="halloween.js" defer></script>
+</body>
+</html>
